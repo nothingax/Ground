@@ -2,20 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Ground</artifactId>
+        <groupId>com.work</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.work</groupId>
-    <artifactId>Ground</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-
-    <modules>
-        <module>ID-Generator</module>
-
-        <!-- 依赖管理，后期单独成一个项目 -->
-        <module>ground-dependency-internal</module>
-        <module>ground-dependency-thirds</module>
-    </modules>
+    <artifactId>ground-dependency-thirds</artifactId>
 
     <!-- 依赖获取库-->
     <repositories>
@@ -29,7 +23,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
         <!-- release版本 暂未添加-->
         <repository>
             <id>cloud-releases</id>
@@ -41,7 +34,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-
         <!-- 其他 -->
         <repository>
             <id>central-aliyun</id>
@@ -60,17 +52,27 @@
 
     </repositories>
 
-    <!-- 发布仓库,snapshots可用,release版本未添加 2017年5月01日 -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>${upload.snapshots.repo.id}</id>
-            <url>${nexus.url}/${upload.snapshots.repo.id}</url>
-        </snapshotRepository>
-        <repository>
-            <id>cloud-releases</id>
-            <url>${nexus.url}/unset</url>
-        </repository>
-    </distributionManagement>
+    <!-- 属性定义 -->
+    <properties>
+        <nexus.url>http://nexus.xxx.com/repository/</nexus.url>
+        <upload.snapshots.repo.id>zhangjianwei-internal-repo</upload.snapshots.repo.id>
+        <download.snapshots.repo.id>zhangjianwei-group-repo</download.snapshots.repo.id>
+        <file.encoding>UTF-8</file.encoding>
+        <java.version>1.8</java.version>
+        <compile.version>1.8</compile.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+
+        <!--  定义版本api版本号-->
+    </properties>
+
+    <!-- 依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+            <!--定义依赖，使用properties中的版本号-->
+        </dependencies>
+    </dependencyManagement>
 
     <!-- 插件 -->
     <build>
@@ -90,17 +92,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- 属性定义 -->
-    <properties>
-        <nexus.url>http://nexus.xxx.com/repository/</nexus.url>
-        <upload.snapshots.repo.id>zhangjianwei-internal-repo</upload.snapshots.repo.id>
-        <download.snapshots.repo.id>zhangjianwei-group-repo</download.snapshots.repo.id>
-        <file.encoding>UTF-8</file.encoding>
-        <java.version>1.8</java.version>
-        <compile.version>1.8</compile.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-    </properties>
 </project>
