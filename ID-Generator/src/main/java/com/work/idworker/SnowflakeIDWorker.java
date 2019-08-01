@@ -16,7 +16,10 @@ package com.work.idworker;
 
 public class SnowflakeIDWorker {
 
-    private final long twepoch = 1564637941476L;
+    /**
+     * 开始时间 2019年08月01日14:09:48
+     */
+    private final long twepoch = 1564639754372L;
 
     private final long workerIdBits = 5L;
 
@@ -91,4 +94,7 @@ public class SnowflakeIDWorker {
         return System.currentTimeMillis();
     }
 
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+    }
 }
