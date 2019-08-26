@@ -6,6 +6,10 @@ package com.work.idworker;
  * Description: ID 生成器
  * 基于 Twitter_Snowflake，整体有序，适用于分布式服务
  *
+ * java中long型为64位 最大9223372036854775807，10进制共19位。
+ * 所以ID转为字符串的话，位数<=19位
+ *
+ *
  * 如何使用：通过new 构造SnowflakeIDWorker 实例，nexId方法获取id即可，正式使用最好使用单例模式
  * <p>
  *
@@ -80,7 +84,13 @@ public class SnowflakeIDWorker {
                 | (datacenterId << datacenterIdShift)
                 | (workerId << workerIdShift)
                 | sequence;
+
+        // return ((timestamp - twepoch) << (int) timestampLeftShift)
+        //         | (idcId << (int) datacenterIdShift)
+        //         | (workerId << (int) workerIdShift)
+        //         | sequence;
     }
+
 
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
@@ -95,6 +105,9 @@ public class SnowflakeIDWorker {
     }
 
     public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
+        // 1 80040 73072 55808
+        SnowflakeIDWorker snowflakeIDWorker = new SnowflakeIDWorker(0, 0);
+        System.out.println(snowflakeIDWorker.nextId());
+        System.out.println(String.valueOf(System.currentTimeMillis()));
     }
 }
