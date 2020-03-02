@@ -15,6 +15,7 @@
         <!-- 依赖管理，后期单独成一个项目 -->
         <module>ground-dependency-internal</module>
         <module>ground-dependency-thirds</module>
+        <module>ground-cache</module>
     </modules>
 
     <!-- 依赖获取库-->
